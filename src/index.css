@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+/* In your tailwind.css or styles.css */
+@layer utilities {
+    .scrollbar-hidden {
+      scrollbar-width: none; /* Firefox */
+    }
+    .scrollbar-hidden::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge */
+    }
+    .scrollbar-hidden::-webkit-scrollbar-thumb {
+      background-color: transparent; /* Makes the thumb invisible */
+    }
+    .scrollbar-hidden::-webkit-scrollbar-track {
+      background: transparent; /* Makes the track invisible */
+    }
+  }
+  

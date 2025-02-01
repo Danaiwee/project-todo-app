@@ -18,3 +18,4 @@ export const DASHBOARD_CHART_DATA = [
     {name: 'Pendding Tasks', value: 40, color: "#ED6A5A"},
     {name: 'Complete Tasks', value: 10, color: "#54D17E"}
 ]
+
