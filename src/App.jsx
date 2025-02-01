@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom"
 
 import HomePage from "./pages/HomePage"
 import Header from "./components/Header"
+import DashBoard from "./pages/DashBoard"
 
 const App = () => {
   return (
@@ -10,7 +11,8 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-      </Routes>
+        <Route path='/dashboard' element={<DashBoard />} />
+       </Routes>
       <Toaster />
     </div>
   )
