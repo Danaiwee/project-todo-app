@@ -1,12 +1,23 @@
 import { Link } from "react-router-dom";
+import {motion} from 'framer-motion';
 
 import todoImg from '../assets/images/todo.png';
 import homeImg from '../assets/images/homeimg.svg';
 
 const HomePage = () => {
   return (
-    <section className="relative w-full h-[85vh] px-10 mt-[50px] lg:mt-0 flex flex-col justify-center items-center">
-      <div className="h-fit lg:h-full flex flex-col lg:flex-row lg:items-center lg:justify-center">
+    <motion.section 
+      className="relative w-full max-w-[1520px] h-[85vh] px-10 mt-[50px] lg:mt-0 flex flex-col justify-center items-center mx-auto"
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      transition={{duration: 1.5}}  
+    >
+      <motion.div 
+        className="h-fit lg:h-full flex flex-col lg:flex-row lg:items-center lg:justify-center"
+        initial={{opacity: 0, y:20}}
+        animate={{opacity: 1, y:0}}
+        transition={{delay: 1.5}}
+      >
         <div className="flex-1 flex flex-col">
           <div className='lg:pl-[100px]'>
           <div className="flex items-center gap-1">
@@ -27,12 +38,17 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="hidden lg:flex flex-1">
+        <motion.div 
+          className="hidden lg:flex flex-1"
+          initial={{opacity: 0, y:20}}
+          animate={{opacity: 1, y:0}}
+          transition={{delay: 1.5}}
+        >
           <img 
             src={todoImg}
             className='w-[100%] md:w-[80%]'
           />
-        </div>
+        </motion.div>
 
         <div className="flex lg:hidden flex-1">
           <img 
@@ -40,12 +56,12 @@ const HomePage = () => {
             className='w-[100%] md:w-[80%]'
           />
         </div>
-      </div>
+      </motion.div>
 
       <div className='absolute bottom-0 flex justify-center bg-gray-800 px-5 py-3 text-sm lg:text-md rounded-full text-gray-300 '>
         Developed by Danai
       </div>
-    </section>
+    </motion.section>
   );
 };
 
