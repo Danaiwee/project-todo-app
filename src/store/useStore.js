@@ -25,6 +25,19 @@ const useStore = create((set) => ({
         toast.success("Deleted task successfully");
 
         return {todoLists: newLists}
+    }),
+
+    toggleList: (id) => set((state) => {
+        const updateList = state.todoLists.map((list) => (
+            list.id === id
+                ? {...list, status: list.status === 'Pending' ? 'Completed' : 'Pending'}
+                : list
+        ));
+
+        localStorage.setItem('list1', JSON.stringify(updateList));
+        toast.success("Updated task successfully");
+
+        return {todoLists: updateList}
     })
 }));
 

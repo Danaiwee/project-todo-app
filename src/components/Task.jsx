@@ -6,7 +6,7 @@ import useStore from "../store/useStore.js";
 const Task = ({list}) => {
   const {id, title, date, time, description, category, alert, status} = list;
 
-  const {deleteList} = useStore();
+  const {deleteList, toggleList} = useStore();
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -14,12 +14,18 @@ const Task = ({list}) => {
     await deleteList(id);
   };
 
+  const handleToggle = async () => {
+    await toggleList(id)
+  }
+
   return (
 <div className={ `px-5 py-2 rounded-xl flex items-center ${status === 'Pending' ? 'bg-red-200' : 'bg-green-200'}`}>
       <div className="flex-3 lg:flex-1 flex items-center">
         <input
           type="checkbox"
           id="activity"
+          checked={status === 'Completed'}
+          onChange={handleToggle}
           className="w-4 h-4 sm:w-5 sm:h-5 border-none outline-none rounded-md focus:outline-none"
         />
         <label
