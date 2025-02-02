@@ -1,13 +1,24 @@
 import {motion} from 'framer-motion';
 import { useEffect, useRef, useState } from "react"
+import { FaTasks } from "react-icons/fa";
+import { MdOutlinePendingActions } from "react-icons/md";
+import { FaRegCalendarCheck } from "react-icons/fa";
+
 
 import { DASHBOARD_CARDS_DATA } from "../constants/data.js"
 import Chart from "./Chart.jsx"
+import useStore from '../store/useStore.js';
+import SummaryCard from './SummaryCard.jsx';
 
 const Data = () => {
   const containerRef = useRef(null);
   const [radius, setRadius] = useState(180);
   const [label, setLabel] = useState(true);
+
+  const {todoLists} = useStore();
+  const totalTasks = todoLists.length;
+  const pendingTasks = todoLists.filter((list) => list.status === 'Pending').length;
+  const completedTasks = todoLists.filter((list) => list.status === 'Completed').length;
 
   useEffect(() => {
     const updateRadius = () => {
@@ -22,7 +33,7 @@ const Data = () => {
                 setRadius(containerWidth*0.2);
                 setLabel(true);
             } else {
-                setRadius(containerWidth*0.14);
+                setRadius(containerWidth*0.12);
                 setLabel(true);
             }
         }
@@ -46,27 +57,24 @@ const Data = () => {
         <p className='text-sm md:text-md text-gray-500'>See you Overall Performance</p>
 
         <div className='grid grid-cols-3 gap-1 sm:gap-5 mt-4'>
-            {DASHBOARD_CARDS_DATA.map((item, index) =>{
-                const Icon = item.icon
-             return (
-                <div
-                    key={index}
-                    className={`flex items-center justify-between px-2 sm:px-5 py-3 ${item.bg} rounded-xl backdrop-blur-md bg-opacity-50`}
-                >
-                    <div className='flex flex-col  gap-1 sm:gap-2'>
-                        <p className='text-white font-medium text-lg sm:text-3xl'>
-                            {item.total}
-                        </p>
-                        <p className='text-white text-sm sm:text-md xl:text-xl'>
-                            {item.title}
-                        </p>
-                    </div>
-
-                    <Icon 
-                        className='hidden xl:block size-10'
-                    />
-                </div>
-            )})}
+            <SummaryCard 
+                bg="bg-blue-400"
+                title="Total Tasks"
+                total={totalTasks}
+                icon={FaTasks}
+            />
+            <SummaryCard 
+                bg="bg-[#ED6A5A]"
+                title="Pending Tasks"
+                total={pendingTasks}
+                icon={MdOutlinePendingActions}
+            />
+            <SummaryCard 
+                bg="bg-[#54D17E]"
+                title="Completed Tasks"
+                total={completedTasks}
+                icon={FaRegCalendarCheck}
+            />
         </div>
 
         <div className='w-full h-full flex flex-col mt-5 '>
@@ -77,7 +85,12 @@ const Data = () => {
                 style={{width: '100%', height: '100%'}}
                 ref={containerRef}
             >
-                <Chart radius={radius} label={label} />
+                <Chart 
+                    radius={radius} 
+                    label={label} 
+                    pendingTasks={pendingTasks}
+                    completedTasks={completedTasks} 
+                />
             </div>
         </div>
 

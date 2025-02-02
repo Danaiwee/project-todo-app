@@ -1,15 +1,18 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-import { DASHBOARD_CHART_DATA } from "../constants/data.js";
 
-const Chart = ({radius, label}) => {
+const Chart = ({radius, label, pendingTasks, completedTasks}) => {
+  const chartData = [
+    { name: "Pendding Tasks", value: pendingTasks, color: "#ED6A5A" },
+    { name: "Completed Tasks", value: completedTasks, color: "#54D17E" },
+  ];
   
   return (
     <>
       <ResponsiveContainer width='100%'>
         <PieChart>
           <Pie
-            data={DASHBOARD_CHART_DATA}
+            data={chartData}
             cx="50%"
             cy="50%"
             labelLine={false}
@@ -19,7 +22,7 @@ const Chart = ({radius, label}) => {
             label={label ? ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%` : null}
             stroke="none"
           >
-            {DASHBOARD_CHART_DATA.map((item, index) => (
+            {chartData.map((item, index) => (
               <Cell key={`cell-${index}`} fill={item.color} />
             ))}
           </Pie>
