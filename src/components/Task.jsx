@@ -1,8 +1,19 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import useStore from "../store/useStore.js";
 
-const Task = ({content, date, time, category, status}) => {
+const Task = ({list}) => {
+  const {id, title, date, time, description, category, alert, status} = list;
+
+  const {deleteList} = useStore();
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    await deleteList(id);
+  };
+
   return (
 <div className={ `px-5 py-2 rounded-xl flex items-center ${status === 'Pending' ? 'bg-red-200' : 'bg-green-200'}`}>
       <div className="flex-3 lg:flex-1 flex items-center">
@@ -15,7 +26,7 @@ const Task = ({content, date, time, category, status}) => {
           htmlFor="activity"
           className="ml-2 text-sm sm:text-lg text-gray-900 font-medium"
         >
-          {content}
+          {title}
           <p className="relative -top-1 text-[10px] sm:text-sm text-gray-700">
             {date}
             <span> {time}</span>
@@ -26,13 +37,13 @@ const Task = ({content, date, time, category, status}) => {
       <div className="hidden flex-1 sm:flex items-center justify-center gap-2">
         <div className="flex flex-col items-center gap-1">
           <p className="text-gray-700 text-sm">Category</p>
-          <button className="bg-indigo-500 px-4 py-1 rounded-full">
+          <button className="w-25 bg-indigo-500 py-1 rounded-full">
             {category}
           </button>
         </div>
         <div className="hidden lg:flex flex-col items-center gap-1">
           <p className="text-gray-700 text-sm">Status</p>
-          <button className={`px-4 py-1 rounded-full ${status === "Pending" ? 'bg-red-400': 'bg-green-500'}`}>{status}</button>
+          <button className={`w-25 py-1 rounded-full ${status === "Pending" ? 'bg-red-400': 'bg-green-500'}`}>{status}</button>
         </div>
       </div>
 
@@ -45,6 +56,7 @@ const Task = ({content, date, time, category, status}) => {
         </Link>
         <RiDeleteBinLine 
             className='size-4 sm:size-5 text-red-500 cursor-pointer'
+            onClick={handleDelete}
         />
       </div>
     </div>

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {motion} from 'framer-motion';
+import useStore from "../store/useStore.js";
 
 const CreateTask = () => {
   const [createFormData, setCreateFormData] = useState({
@@ -11,6 +12,13 @@ const CreateTask = () => {
     category: 'personal',
     alert: 'enable'
   });
+
+  const {todoLists, createList} = useStore();
+
+  useEffect(() => {
+    console.log('create: ',todoLists);
+    
+  }, [todoLists])
   
   const handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -18,10 +26,19 @@ const CreateTask = () => {
     setCreateFormData((prev) => ({...prev, [name]: value}));
   };
 
-  const handleFormSubmit =(e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(createFormData);
+    await createList(createFormData);
+
+    setCreateFormData({
+      title: '',
+    date: '',
+    time: '',
+    description: '',
+    category: 'personal',
+    alert: 'enable'
+    })
   };
   return (
     <motion.section 

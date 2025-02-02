@@ -1,16 +1,22 @@
 import { motion } from "framer-motion";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 
 import { TASK_FILTER_LISTS } from "../constants/data.js";
-import { TASK_DATA } from "../constants/data.js";
 import Task from "./Task";
 import { Link } from "react-router-dom";
+import useStore from "../store/useStore.js";
 
-const Tasks = ({ setOpenCreateTask, openCreateTask }) => {
+const Tasks = () => {
   const [filtered, setFiltered] = useState("All");
-  const [status, setStatus] = useState("Pending");
+  
+  const {todoLists} = useStore();
+
+  useEffect(() => {
+    console.log("Tasks: ", todoLists);
+    
+  },[todoLists])
   return (
     <motion.div
       className="w-full h-full p-6 flex flex-col"
@@ -65,14 +71,10 @@ const Tasks = ({ setOpenCreateTask, openCreateTask }) => {
       </div>
 
       <div className="w-full h-full overflow-y-auto scrollbar-hidden flex flex-col mt-5 gap-1.5">
-        {TASK_DATA.map((item) => (
+        {todoLists && todoLists?.map((list) => (
           <Task
-            key={item.id}
-            content={item.content}
-            date={item.date}
-            time={item.time}
-            category={item.category}
-            status={item.status}
+            key={list.id}
+            list={list}
           />
         ))}
       </div>
