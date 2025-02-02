@@ -6,6 +6,7 @@ import Header from "./components/Header"
 import DashBoard from "./pages/DashBoard"
 import Contact from "./pages/Contact"
 import CreateTask from './pages/CreateTask'
+import UpdateTask from "./pages/๊UpdateTask"
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/dashboard' element={<DashBoard />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/create' element={<CreateTask />} />
+        <Route path='/update/:id' element={<UpdateTask />} />
        </Routes>
       <Toaster />
     </div>

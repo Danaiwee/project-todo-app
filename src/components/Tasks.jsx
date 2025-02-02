@@ -1,14 +1,16 @@
 import { motion } from "framer-motion";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
+import { FaPlus } from "react-icons/fa";
 
 import { TASK_FILTER_LISTS } from "../constants/data.js";
 import { TASK_DATA } from "../constants/data.js";
 import Task from "./Task";
+import { Link } from "react-router-dom";
 
-const Tasks = () => {
+const Tasks = ({ setOpenCreateTask, openCreateTask }) => {
   const [filtered, setFiltered] = useState("All");
-  const [status, setStatus] = useState('Pending');
+  const [status, setStatus] = useState("Pending");
   return (
     <motion.div
       className="w-full h-full p-6 flex flex-col"
@@ -18,7 +20,9 @@ const Tasks = () => {
     >
       <div className="flex items-center justify-between">
         <div className="flex-1 flex flex-col">
-          <h1 className="text-xl sm:text-3xl text-gray-300 font-medium">Tasks</h1>
+          <h1 className="text-xl sm:text-3xl text-gray-300 font-medium">
+            Tasks
+          </h1>
           <p className="text-sm sm:text-md text-gray-500">February 1, 2025</p>
         </div>
 
@@ -60,9 +64,9 @@ const Tasks = () => {
         ))}
       </div>
 
-      <div className='w-full h-full overflow-y-auto scrollbar-hidden flex flex-col mt-5 gap-1.5'>  
+      <div className="w-full h-full overflow-y-auto scrollbar-hidden flex flex-col mt-5 gap-1.5">
         {TASK_DATA.map((item) => (
-          <Task 
+          <Task
             key={item.id}
             content={item.content}
             date={item.date}
@@ -72,6 +76,13 @@ const Tasks = () => {
           />
         ))}
       </div>
+
+      <Link
+        to='/create'
+        className="w-fit p-5 rounded-full bg-indigo-500 hover:bg-indigo-400 transition-all duration-300 bg-opacity-50 backdrop-blur-md cursor-pointer absolute bottom-5 right-5"
+      >
+        <FaPlus />
+      </Link>
     </motion.div>
   );
 };

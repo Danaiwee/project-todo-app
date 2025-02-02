@@ -1,5 +1,6 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 const Task = ({content, date, time, category, status}) => {
   return (
@@ -31,14 +32,17 @@ const Task = ({content, date, time, category, status}) => {
         </div>
         <div className="hidden lg:flex flex-col items-center gap-1">
           <p className="text-gray-700 text-sm">Status</p>
-          <button className="bg-red-400 px-4 py-1 rounded-full">{status}</button>
+          <button className={`px-4 py-1 rounded-full ${status === "Pending" ? 'bg-red-400': 'bg-green-500'}`}>{status}</button>
         </div>
       </div>
 
       <div className='flex-1 flex items-center justify-end'>
+        <Link to='/update/12'>
         <HiOutlinePencilSquare 
             className='size-4 sm:size-5 text-indigo-500 cursor-pointer'
         />
+        
+        </Link>
         <RiDeleteBinLine 
             className='size-4 sm:size-5 text-red-500 cursor-pointer'
         />
