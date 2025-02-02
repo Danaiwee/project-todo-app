@@ -42,22 +42,22 @@ const Data = () => {
     animate={{opacity: 1}} 
     transition={{duration: 1.5}}
     >
-        <h1 className='text-3xl text-gray-300 font-medium'>Dashboard</h1>
-        <p className='text-md text-gray-500'>See you Overall Performance</p>
+        <h1 className='text-xl sm:text-3xl text-gray-300 font-medium'>Dashboard</h1>
+        <p className='text-sm md:text-md text-gray-500'>See you Overall Performance</p>
 
-        <div className='grid grid-cols-3 gap-5 mt-4'>
+        <div className='grid grid-cols-3 gap-1 sm:gap-5 mt-4'>
             {DASHBOARD_CARDS_DATA.map((item, index) =>{
                 const Icon = item.icon
              return (
                 <div
                     key={index}
-                    className={`flex items-center justify-between px-5 py-3 ${item.bg} rounded-xl backdrop-blur-md bg-opacity-50`}
+                    className={`flex items-center justify-between px-2 sm:px-5 py-3 ${item.bg} rounded-xl backdrop-blur-md bg-opacity-50`}
                 >
-                    <div className='flex flex-col gap-2'>
-                        <p className='text-white font-medium text-3xl'>
+                    <div className='flex flex-col  gap-1 sm:gap-2'>
+                        <p className='text-white font-medium text-lg sm:text-3xl'>
                             {item.total}
                         </p>
-                        <p className='text-white text-md xl:text-xl'>
+                        <p className='text-white text-sm sm:text-md xl:text-xl'>
                             {item.title}
                         </p>
                     </div>
@@ -70,10 +70,10 @@ const Data = () => {
         </div>
 
         <div className='w-full h-full flex flex-col mt-5 '>
-            <h1 className='text-3xl text-gray-300 font-medium'>Performance</h1>    
+            <h1 className='text-xl sm:text-3xl text-gray-300 font-medium'>Performance</h1>    
 
             <div
-                className='bg-gray-700 mt-5 rounded-3xl flex justify-center items-center'
+                className='bg-gray-700 mt-2 sm:mt-5 rounded-3xl flex justify-center items-center'
                 style={{width: '100%', height: '100%'}}
                 ref={containerRef}
             >
