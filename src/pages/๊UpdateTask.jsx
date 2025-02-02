@@ -1,16 +1,38 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import {motion} from 'framer-motion';
+import useStore from "../store/useStore.js";
 
 const UpdateTask = () => {
+  const {todoLists, updateList} = useStore();
+  const {id} = useParams();
+
   const [updateFormData, setUpdateFormData] = useState({
-    title: '',
+    title:  '',
     date: '',
-    time: '',
-    description: '',
+    time:  '',
+    description:  '',
     category: 'personal',
     alert: 'enable'
   });
+
+  useEffect(() => {
+    if(id && todoLists){
+      const useData = todoLists.find((list) => list.id.toString() === id);
+
+      if(useData){
+        setUpdateFormData({
+          title: useData.title || '',
+          date: useData.date || '',
+          time: useData.time || '',
+          description: useData.description || '',
+          category: useData.category || 'personal',
+          alert: useData.alert || 'enable'
+        })
+      }
+    }
+    
+  }, [id, todoLists])
   
   const handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -18,10 +40,13 @@ const UpdateTask = () => {
     setUpdateFormData((prev) => ({...prev, [name]: value}));
   };
 
-  const handleFormSubmit =(e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(updateFormData);
+    console.log('Updating task with id:', id);
+    console.log('Updated task data:', updateFormData);
+
+    await updateList(id, updateFormData);
   };
   return (
     <motion.section 
@@ -139,7 +164,10 @@ const UpdateTask = () => {
                 Back
               </button>
             </Link>
-            <button className="flex-1 bg-indigo-500 hover:bg-indigo-400 rounded-xl p-3 cursor-pointer">
+            <button 
+              className="flex-1 bg-indigo-500 hover:bg-indigo-400 rounded-xl p-3 cursor-pointer"
+              type='submit'
+            >
               Update
             </button>
           </div>

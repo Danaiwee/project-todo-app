@@ -29,7 +29,7 @@ export const DASHBOARD_CHART_DATA = [
   { name: "Complete Tasks", value: 10, color: "#54D17E" },
 ];
 
-export const TASK_FILTER_LISTS = ["All", "Pending", "Complete"];
+export const TASK_FILTER_LISTS = ["All", "Pending", "Completed"];
 export const TASK_DATA = [
   {
     id: 1,

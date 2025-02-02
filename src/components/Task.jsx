@@ -1,6 +1,8 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import {motion} from 'framer-motion';
+
 import useStore from "../store/useStore.js";
 
 const Task = ({list}) => {
@@ -19,7 +21,12 @@ const Task = ({list}) => {
   }
 
   return (
-<div className={ `px-5 py-2 rounded-xl flex items-center ${status === 'Pending' ? 'bg-red-200' : 'bg-green-200'}`}>
+<motion.div 
+  className={ `px-5 py-2 rounded-xl flex items-center ${status === 'Pending' ? 'bg-red-200' : 'bg-green-200'}`}
+  initial={{opacity: 0}}
+  animate={{opacity: 1}}
+  transition={{duration: 1.5}}
+>
       <div className="flex-3 lg:flex-1 flex items-center">
         <input
           type="checkbox"
@@ -54,7 +61,7 @@ const Task = ({list}) => {
       </div>
 
       <div className='flex-1 flex items-center justify-end'>
-        <Link to='/update/12'>
+        <Link to={`/update/${list.id}`}>
         <HiOutlinePencilSquare 
             className='size-4 sm:size-5 text-indigo-500 cursor-pointer'
         />
@@ -65,7 +72,7 @@ const Task = ({list}) => {
             onClick={handleDelete}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

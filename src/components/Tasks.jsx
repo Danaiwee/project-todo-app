@@ -9,10 +9,36 @@ import { Link } from "react-router-dom";
 import useStore from "../store/useStore.js";
 
 const Tasks = () => {
-  const [filtered, setFiltered] = useState("All");
-  
   const {todoLists} = useStore();
+  
+  const [filtered, setFiltered] = useState("All");
+  const [search, setSearch] = useState('');
 
+  const filteredTasks = todoLists.filter((list) => {
+    if(search){
+      const title = list.title.toLowerCase();
+      return title.includes(search)
+    }
+
+    if(filtered === 'All'){
+      return true;
+    }
+
+    return list.status === filtered
+  });
+
+  const sortedTasks = filteredTasks.sort((a,b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    return dateB - dateA;
+  })
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  };
+  
+  
   useEffect(() => {
     console.log("Tasks: ", todoLists);
     
@@ -51,6 +77,8 @@ const Tasks = () => {
             className="w-full md:w-[50%] h-8 bg-gray-700 ouline-none border-none rounded-full focus:outline-none pl-5 overflow-hidden text-sm sm:text-md"
             type="text"
             placeholder="Search here..."
+            value={search}
+            onChange={handleSearch}
           />
           <FaSearch className="hidden sm:block size-5 absolute text-gray-400 top-1 right-3" />
         </div>
@@ -70,8 +98,10 @@ const Tasks = () => {
         ))}
       </div>
 
-      <div className="w-full h-full overflow-y-auto scrollbar-hidden flex flex-col mt-5 gap-1.5">
-        {todoLists && todoLists?.map((list) => (
+      <div 
+        className="w-full h-full overflow-y-auto scrollbar-hidden flex flex-col mt-5 gap-1.5"
+      >
+        {todoLists && sortedTasks.map((list) => (
           <Task
             key={list.id}
             list={list}
