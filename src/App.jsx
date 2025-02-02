@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage"
 import Header from "./components/Header"
 import DashBoard from "./pages/DashBoard"
 import Contact from "./pages/Contact"
+import CreateTask from './pages/CreateTask'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path='/dashboard' element={<DashBoard />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/create' element={<CreateTask />} />
        </Routes>
       <Toaster />
     </div>

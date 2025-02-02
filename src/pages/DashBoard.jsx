@@ -8,6 +8,7 @@ import Tasks from "../components/Tasks.jsx";
 
 const DashBoard = () => {
   const [page, setPage] = useState("Dashboard");
+  const [tasks, setTasks] = useState([]);
 
   return (
     <section className="w-full h-full overflow-hidden flex flex-col items-center mt-1">
@@ -33,8 +34,8 @@ const DashBoard = () => {
       >
         <div className="w-full h-[80vh] bg-gray-800 backdrop-blur-md bg-opacity-50 rounded-3xl">
           {page === 'Dashboard' && <Data /> }
-          {page === 'Tasks' && <Tasks />}
-          
+          {page === 'Tasks' && (
+            <Tasks />)}
         </div>
 
         <div className="hidden xl:block w-[460px] h-[80vh] bg-gray-800 backdrop-blur-md bg-opacity-50 rounded-3xl">
