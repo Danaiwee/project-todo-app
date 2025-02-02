@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { DASHBOARD_TOPICS } from "../constants/data.js";
 import Data from "../components/Data.jsx";
 import Notification from "../components/Notification.jsx";
+import Tasks from "../components/Tasks.jsx";
 
 const DashBoard = () => {
   const [page, setPage] = useState("Dashboard");
@@ -31,7 +32,9 @@ const DashBoard = () => {
         transition={{ delay: 0.5, duration: 0.5 }}
       >
         <div className="w-full h-[80vh] bg-gray-800 backdrop-blur-md bg-opacity-50 rounded-3xl">
-          <Data />
+          {page === 'Dashboard' && <Data /> }
+          {page === 'Tasks' && <Tasks />}
+          
         </div>
 
         <div className="hidden xl:block w-[460px] h-[80vh] bg-gray-800 backdrop-blur-md bg-opacity-50 rounded-3xl">

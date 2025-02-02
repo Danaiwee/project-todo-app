@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 /* In your tailwind.css or styles.css */
 @layer utilities {
     .scrollbar-hidden {
