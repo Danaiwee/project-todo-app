@@ -49,7 +49,7 @@ const Header = () => {
                 />
 
                 {showMenu && (
-                    <div className='absolute flex flex-col items-end top-15 right-2 bg-gray-500 p-5 rounded-lg transition-all duration-300'>
+                    <div className='absolute flex flex-col items-end top-15 right-2 bg-gray-500 p-5 rounded-lg transition-all duration-300 z-50'>
                     {HEADER_LISTS.map((item) => (
                         <Link 
                             key={item.id}
