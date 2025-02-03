@@ -32,7 +32,7 @@ const useStore = create((set) => ({
   updateList: (id, updatedData) =>
     set((state) => {
       const newLists = state.todoLists.map((list) =>
-        list.id === id ? { ...list, updatedData } : list
+        list.id.toString() === id.toString() ? { ...list, ...updatedData } : list
       );
       console.log("Updated todoLists:", newLists); // Log the updated lists
       localStorage.setItem("list1", JSON.stringify(newLists));
