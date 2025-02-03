@@ -1,10 +1,19 @@
 import {motion} from 'framer-motion';
+import {useEffect} from 'react';
 
 import profileImg from '/avatars/boy1.png';
 import NotificationCard from './NotificationCard';
+import useNotificationStore from '../store/useNotificationStore.js';
 
 
 const Notification = () => {
+  const {notifications, startNotificationChecker} = useNotificationStore();
+
+  useEffect(() => {
+    startNotificationChecker();
+
+  }, [notifications, startNotificationChecker])
+  
   return (
     <motion.div
       className='flex flex-col p-6'
@@ -26,15 +35,13 @@ const Notification = () => {
       <h1 className='text-gray-300 text-md font-medium mt-5'>Notifications</h1>
       <div className='w-full h-[56vh] overflow-auto scrollbar-hidden mt-1 rounded-lg'>
         <div className='flex flex-col gap-1'>
-          <NotificationCard />
-          <NotificationCard />
-          <NotificationCard />
-          <NotificationCard />
-          <NotificationCard />
-          <NotificationCard />
-          <NotificationCard />
-          <NotificationCard />
-          <NotificationCard />
+          {notifications && notifications.map((item) => (
+            <NotificationCard 
+              key={item.id}
+              item={item}
+            />
+          ))}
+          
         </div>
       </div>
     </motion.div>
