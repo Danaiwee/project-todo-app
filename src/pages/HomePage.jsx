@@ -16,7 +16,7 @@ const HomePage = () => {
         className="h-fit lg:h-full flex flex-col lg:flex-row lg:items-center lg:justify-center"
         initial={{opacity: 0, y:20}}
         animate={{opacity: 1, y:0}}
-        transition={{delay: 1.5}}
+        transition={{delay: 0.5}}
       >
         <div className="flex-1 flex flex-col">
           <div className='lg:pl-[100px]'>
@@ -42,7 +42,7 @@ const HomePage = () => {
           className="hidden lg:flex flex-1"
           initial={{opacity: 0, y:20}}
           animate={{opacity: 1, y:0}}
-          transition={{delay: 1.5}}
+          transition={{delay: 1.0}}
         >
           <img 
             src={todoImg}

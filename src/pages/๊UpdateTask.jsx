@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {motion} from 'framer-motion';
 import useStore from "../store/useStore.js";
 
-const UpdateTask = () => {
+const UpdateTask = ({setPage}) => {
+  const navigate = useNavigate();
   const {todoLists, updateList} = useStore();
   const {id} = useParams();
 
@@ -42,11 +43,10 @@ const UpdateTask = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    console.log('Updating task with id:', id);
-    console.log('Updated task data:', updateFormData);
-
+    
     await updateList(id, updateFormData);
+    setPage('Tasks');
+    navigate('/dashboard');
   };
   return (
     <motion.section 

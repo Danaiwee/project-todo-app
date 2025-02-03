@@ -9,6 +9,7 @@ import { DASHBOARD_CARDS_DATA } from "../constants/data.js"
 import Chart from "./Chart.jsx"
 import useStore from '../store/useStore.js';
 import SummaryCard from './SummaryCard.jsx';
+import { Link } from 'react-router-dom';
 
 const Data = () => {
   const containerRef = useRef(null);
@@ -85,12 +86,25 @@ const Data = () => {
                 style={{width: '100%', height: '100%'}}
                 ref={containerRef}
             >
-                <Chart 
+                {totalTasks > 0 && (
+                    <Chart 
                     radius={radius} 
                     label={label} 
                     pendingTasks={pendingTasks}
                     completedTasks={completedTasks} 
                 />
+                )}
+
+                {totalTasks === 0 && (
+                    <div className='w-full h-full flex items-center justify-center'>
+                    <p className='text-lg text-gray-500'>
+                        No todo List, Please{' '} 
+                        <Link to='/create' className='hover:text-indigo-500 transition-all duration-300'>
+                        create
+                        </Link>
+                    </p>
+                  </div>
+                )}
             </div>
         </div>
 

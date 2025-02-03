@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {  useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {motion} from 'framer-motion';
 import useStore from "../store/useStore.js";
 
-const CreateTask = () => {
+const CreateTask = ({setPage}) => {
+  const navigate = useNavigate();
   const [createFormData, setCreateFormData] = useState({
     title: '',
     date: '',
@@ -13,13 +14,8 @@ const CreateTask = () => {
     alert: 'enable'
   });
 
-  const {todoLists, createList} = useStore();
+  const {createList} = useStore();
 
-  useEffect(() => {
-    console.log('create: ',todoLists);
-    
-  }, [todoLists])
-  
   const handleInputChange = (e) => {
     const {name, value} = e.target;
 
@@ -31,6 +27,7 @@ const CreateTask = () => {
 
     await createList(createFormData);
 
+    setPage("Tasks");
     setCreateFormData({
       title: '',
     date: '',
@@ -38,7 +35,9 @@ const CreateTask = () => {
     description: '',
     category: 'personal',
     alert: 'enable'
-    })
+    });
+
+    navigate('/dashboard');
   };
   return (
     <motion.section 

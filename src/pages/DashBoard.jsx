@@ -6,9 +6,7 @@ import Data from "../components/Data.jsx";
 import Notification from "../components/Notification.jsx";
 import Tasks from "../components/Tasks.jsx";
 
-const DashBoard = () => {
-  const [page, setPage] = useState("Dashboard");
-  const [tasks, setTasks] = useState([]);
+const DashBoard = ({page, setPage}) => {
 
   return (
     <section className="w-full h-full overflow-hidden flex flex-col items-center mt-1">

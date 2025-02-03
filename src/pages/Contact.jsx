@@ -1,3 +1,4 @@
+
 const Contact = () => {
   return (
     <section className="w-full h-[90vh] flex flex-col items-center">
@@ -9,11 +10,22 @@ const Contact = () => {
         </div>
         <div className="w-full flex flex-col items-center mt-10">
           <p className="text-md text-gray-500">More project on:</p>
-          <p className="text-indigo-500">www.danaiweeportfolio.com </p>
+          <a 
+            className="text-indigo-500 hover:underline"
+            href="http://www.danaiweeportfolio.com"
+            target="_blank"
+          >
+              www.danaiweeportfolio.com 
+          </a>
         </div>
         <div className="w-full flex flex-col items-center mt-10">
           <p className="text-md text-gray-500">GitHub:</p>
-          <p className="text-indigo-500 text-center">https://github.com/Danaiwee?tab=repositories </p>
+          <a 
+            className="text-indigo-500 text-center hover:underline"
+             href="https://github.com/Danaiwee?tab=repositories"
+            target="_blank"
+          >
+            https://github.com/Danaiwee?tab=repositories </a>
         </div>
       </div>
 

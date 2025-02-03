@@ -38,11 +38,6 @@ const Tasks = () => {
     setSearch(e.target.value)
   };
   
-  
-  useEffect(() => {
-    console.log("Tasks: ", todoLists);
-    
-  },[todoLists])
   return (
     <motion.div
       className="w-full h-full p-6 flex flex-col"
@@ -107,6 +102,17 @@ const Tasks = () => {
             list={list}
           />
         ))}
+
+        {todoLists.length === 0 && (
+          <div className='w-full h-full flex items-center justify-center'>
+          <p className='text-lg text-gray-500'>
+              No todo List, Please{' '} 
+              <Link to='/create' className='hover:text-indigo-500 transition-all duration-300'>
+              create
+              </Link>
+          </p>
+        </div>
+        )}
       </div>
 
       <Link
